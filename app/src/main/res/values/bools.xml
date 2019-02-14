@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="a0">true</bool>
+    <bool name="a1">true</bool>
+    <bool name="a2">true</bool>
+    <bool name="a3">false</bool>
+    <bool name="a4">true</bool>
+    <bool name="a5">false</bool>
+    <bool name="a6">false</bool>
+    <bool name="a7">true</bool>
+    <bool name="a8">true</bool>
+    <bool name="a9">false</bool>
+    <bool name="a10">false</bool>
+    <bool name="a11">false</bool>
+    <bool name="a12">false</bool>
+    <bool name="a13">false</bool>
+    <bool name="a14">true</bool>
+    <bool name="a15">false</bool>
+    <bool name="a16">false</bool>
+    <bool name="a17">false</bool>
+    <bool name="a18">true</bool>
+    <bool name="a19">true</bool>
+</resources>

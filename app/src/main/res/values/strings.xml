@@ -1,8 +1,31 @@
 <resources>
     <string name="app_name">QuizSS</string>
-    <string name="question_text">This is an app</string>
     <string name="true_button">True</string>
     <string name="false_button">False</string>
+    <string name="skip_button">Skip</string>
     <string name="correct_toast">Correct</string>
     <string name="incorrect_toast">Incorrect</string>
+    <string name="locked_toast">No More Questions!</string>
+
+    <string name="q0">This Is An App</string>
+    <string name="q1">You Are Using An App</string>
+    <string name="q2">The Last Two Questions Were Easy</string>
+
+    <string name="q3">The Most Listened To Song On Spotify Was \"Despacito (ft. Justin Bieber)\" in 2017</string>
+    <string name="q4">The Chainsmokers Released the Album \"Sick Boy\" in 2018</string>
+    <string name="q5">Ariana Grande\'s song \"imagine\" is Part of Her Album \"Sweetener\"</string>
+    <string name="q6">Kendrick Lamar is the Artist of the Song \"MIDDLE CHILD\"</string>
+    <string name="q7">\"Without Me\" is a Song By the Artist Halsey</string>
+    <string name="q8">The Song \"Sunflower\" is from the Movie \"Spiderman: Into The Spider-Verse\"</string>
+    <string name="q9">\"Passionfruit\" Is a Song By Travis Scott</string>
+    <string name="q10">Drake\'s Latest Album is \"More Life\"</string>
+    <string name="q11">Big Sean\'s \"In Tune\" is Part of His Album "\I Decided\"</string>
+    <string name="q12">The Song \"Beautiful\" is By Zedd</string>
+    <string name="q13">The Song \"Slow Dancing In The Dark\" Is By Bazzi</string>
+    <string name="q14">The Song \"Polaroid\" is By Liam Payne</string>
+    <string name="q15">The Song \"Location\" is Part of Khalid\'s Album \"Suncity\"</string>
+    <string name="q16">\"Pompeii\" is a Song that was Released in 2013</string>
+    <string name="q17">\"If I told you this was only gonna hurt\" is from the song \"Scared To Be Lonely\" by Martin Garrix</string>
+    <string name="q18">The Song \"Chateau\" is By the Artist Blackbear</string>
+    <string name="q19">The Song \"I Need Your Love\" is Part of Calvin Harris\' Album \"18 Months\"</string>
 </resources>
