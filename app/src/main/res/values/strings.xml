@@ -1,16 +1,24 @@
 <resources>
     <string name="app_name">QuizSS</string>
+
     <string name="true_button">True</string>
     <string name="false_button">False</string>
     <string name="skip_button">Skip</string>
+    <string name="reset_button">Reset</string>
+    <string name="show_answer_button">Show Answer</string>
+    <string name="hint_button">Hint</string>
+    <string name="go_back_button">Go Back</string>
+
+    <string name="warning_text">Are you sure?</string>
+
     <string name="correct_toast">Correct</string>
     <string name="incorrect_toast">Incorrect</string>
     <string name="locked_toast">No More Questions!</string>
 
+
     <string name="q0">This Is An App</string>
     <string name="q1">You Are Using An App</string>
     <string name="q2">The Last Two Questions Were Easy</string>
-
     <string name="q3">The Most Listened To Song On Spotify Was \"Despacito (ft. Justin Bieber)\" in 2017</string>
     <string name="q4">The Chainsmokers Released the Album \"Sick Boy\" in 2018</string>
     <string name="q5">Ariana Grande\'s song \"imagine\" is Part of Her Album \"Sweetener\"</string>
