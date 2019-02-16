@@ -4,10 +4,12 @@ package com.example.quizss;
 public class Question{
     private boolean mAnswerTrue;
     private int mTextResId;
+    private int mHintResId;
 
-    public Question (int textResid, boolean answerTrue){
+    public Question (int textResId, boolean answerTrue, int hintResId){
         mAnswerTrue = answerTrue;
-        mTextResId = textResid;
+        mTextResId = textResId;
+        mHintResId = hintResId;
     }
 
     public boolean isAnswerTrue(){
@@ -25,4 +27,8 @@ public class Question{
     public void setTextResId(int textResId){
         mTextResId = textResId;
     }
+
+    public int getHintResId(){return mHintResId;}
+
+    public void setHintResId(int hintResId){mHintResId = hintResId;}
 }

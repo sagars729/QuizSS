@@ -5,7 +5,7 @@
     <string name="false_button">False</string>
     <string name="skip_button">Skip</string>
     <string name="reset_button">Reset</string>
-    <string name="show_answer_button">Show Answer</string>
+    <string name="play_hint_button">Play Hint</string>
     <string name="hint_button">Hint</string>
     <string name="go_back_button">Go Back</string>
 

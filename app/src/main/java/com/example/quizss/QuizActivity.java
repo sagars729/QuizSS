@@ -69,7 +69,9 @@ public class QuizActivity extends AppCompatActivity {
         for(int i = 0; i < mQuestionBank.length; i+=1)
             mQuestionBank[i] = new Question(
                     getResources().getIdentifier("q" + i,"string",getPackageName()),
-                    getResources().getBoolean(getResources().getIdentifier("a" + i,"bool",getPackageName()))
+                    getResources().getBoolean(getResources().getIdentifier("a" + i,"bool",getPackageName())),
+                    getResources().getIdentifier("h"+i,"raw",getPackageName())
+
             );
 
         updateQuestion();
@@ -112,7 +114,7 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(QuizActivity.this, HintActivity.class);
-                i.putExtra("ANSWER",mQuestionBank[mCurrentIndex].isAnswerTrue());
+                i.putExtra("HINT",mQuestionBank[mCurrentIndex].getHintResId());
                 startActivityForResult(i,HINT_ACTIVITY_REQUEST_CODE);
             }
         });
