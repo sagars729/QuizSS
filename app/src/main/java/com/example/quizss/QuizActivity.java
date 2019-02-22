@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class QuizActivity extends AppCompatActivity {
     private int mCurrentIndex = -1;
     private double mScore = 0;
     private boolean mLock = false;
+    private ProgressBar mProgressBar;
 
     private static final int HINT_ACTIVITY_REQUEST_CODE = 0;
 
@@ -45,9 +47,13 @@ public class QuizActivity extends AppCompatActivity {
     private void updateQuestion() {
         if(mCurrentIndex < mQuestionBank.length - 1) {
             mCurrentIndex++;
+            mProgressBar.setProgress(mCurrentIndex);
             mQuestionTextView.setText(mQuestionBank[mCurrentIndex].getTextResId());
             mQuestionHeader.setText("Question " + mCurrentIndex);
-        }else mLock = true;
+        }else{
+            mLock = true;
+            mProgressBar.setProgress(mQuestionBank.length);
+        }
         mPointsTextView.setText("Points: " + mScore);
         updateHighScore();
     }
@@ -81,6 +87,9 @@ public class QuizActivity extends AppCompatActivity {
         mSharedPreferences = this.getSharedPreferences("HighScore", Context.MODE_PRIVATE);
         mHighScore = mSharedPreferences.getFloat("HighScore", 0.0f);
         mHighScoreTextView.setText("High Score: " + mHighScore);
+
+        mProgressBar = (ProgressBar) findViewById(R.id.determinateBar);
+        mProgressBar.setMax(mQuestionBank.length);
 
         for(int i = 0; i < mQuestionBank.length; i+=1)
             mQuestionBank[i] = new Question(
