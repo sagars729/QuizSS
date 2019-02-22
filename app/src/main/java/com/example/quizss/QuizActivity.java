@@ -2,7 +2,9 @@ package com.example.quizss;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +22,7 @@ public class QuizActivity extends AppCompatActivity {
     private TextView mQuestionTextView;
     private TextView mQuestionHeader;
     private TextView mPointsTextView;
+    private TextView mHighScoreTextView;
 
     private Question [] mQuestionBank = new Question[20];
 
@@ -29,16 +32,24 @@ public class QuizActivity extends AppCompatActivity {
 
     private static final int HINT_ACTIVITY_REQUEST_CODE = 0;
 
+    private SharedPreferences mSharedPreferences;
+    private double mHighScore = 0;
+
+    private void updateHighScore(){
+        if(mScore > mHighScore){
+            mHighScore = mScore;
+            mSharedPreferences.edit().putFloat("HighScore", (float) mScore).apply();
+            mHighScoreTextView.setText("High Score: " + mHighScore);
+        }
+    }
     private void updateQuestion() {
         if(mCurrentIndex < mQuestionBank.length - 1) {
             mCurrentIndex++;
             mQuestionTextView.setText(mQuestionBank[mCurrentIndex].getTextResId());
             mQuestionHeader.setText("Question " + mCurrentIndex);
-            mPointsTextView.setText("Points: " + mScore);
-        }else{
-            mPointsTextView.setText("Points: " + mScore);
-            mLock = true;
-        }
+        }else mLock = true;
+        mPointsTextView.setText("Points: " + mScore);
+        updateHighScore();
     }
 
     private void checkAnswer(boolean userPressedTrue){
@@ -65,6 +76,11 @@ public class QuizActivity extends AppCompatActivity {
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
         mQuestionHeader = (TextView) findViewById(R.id.question_header);
         mPointsTextView = (TextView) findViewById(R.id.points_text_view);
+        mHighScoreTextView = (TextView) findViewById(R.id.high_score_text_view);
+
+        mSharedPreferences = this.getSharedPreferences("HighScore", Context.MODE_PRIVATE);
+        mHighScore = mSharedPreferences.getFloat("HighScore", 0.0f);
+        mHighScoreTextView.setText("High Score: " + mHighScore);
 
         for(int i = 0; i < mQuestionBank.length; i+=1)
             mQuestionBank[i] = new Question(
