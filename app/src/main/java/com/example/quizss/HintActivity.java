@@ -44,4 +44,14 @@ public class HintActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        mMediaPlayer.release();
+        mMediaPlayer = null;
+        Intent i = new Intent();
+        i.putExtra("PENALTY",mPenalty);
+        setResult(RESULT_OK,i);
+        finish();
+    }
 }
