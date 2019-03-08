@@ -41,7 +41,7 @@ public class QuizActivity extends AppCompatActivity {
         if(mScore > mHighScore){
             mHighScore = mScore;
             mSharedPreferences.edit().putFloat("HighScore", (float) mScore).apply();
-            mHighScoreTextView.setText("High Score: " + mHighScore);
+            mHighScoreTextView.setText("Local High Score: " + mHighScore);
         }
     }
     private void updateQuestion() {
@@ -53,9 +53,9 @@ public class QuizActivity extends AppCompatActivity {
         }else{
             mLock = true;
             mProgressBar.setProgress(mQuestionBank.length);
+            updateHighScore();
         }
         mPointsTextView.setText("Points: " + mScore);
-        updateHighScore();
     }
 
     private void checkAnswer(boolean userPressedTrue){
@@ -86,7 +86,7 @@ public class QuizActivity extends AppCompatActivity {
 
         mSharedPreferences = this.getSharedPreferences("HighScore", Context.MODE_PRIVATE);
         mHighScore = mSharedPreferences.getFloat("HighScore", 0.0f);
-        mHighScoreTextView.setText("High Score: " + mHighScore);
+        mHighScoreTextView.setText("Local High Score: " + mHighScore);
 
         mProgressBar = (ProgressBar) findViewById(R.id.determinateBar);
         mProgressBar.setMax(mQuestionBank.length);
@@ -96,9 +96,7 @@ public class QuizActivity extends AppCompatActivity {
                     getResources().getIdentifier("q" + i,"string",getPackageName()),
                     getResources().getBoolean(getResources().getIdentifier("a" + i,"bool",getPackageName())),
                     getResources().getIdentifier("h"+i,"raw",getPackageName())
-
             );
-
         updateQuestion();
 
         mTrueButton.setOnClickListener(new View.OnClickListener() {
