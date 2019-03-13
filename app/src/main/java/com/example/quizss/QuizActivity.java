@@ -136,9 +136,11 @@ public class QuizActivity extends AppCompatActivity {
         mHintButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(QuizActivity.this, HintActivity.class);
-                i.putExtra("HINT",mQuestionBank[mCurrentIndex].getHintResId());
-                startActivityForResult(i,HINT_ACTIVITY_REQUEST_CODE);
+                Intent i = new Intent(QuizActivity.this, LeadActivity.class);
+                startActivity(i);
+                //Intent i = new Intent(QuizActivity.this, HintActivity.class);
+                //i.putExtra("HINT",mQuestionBank[mCurrentIndex].getHintResId());
+                //startActivityForResult(i,HINT_ACTIVITY_REQUEST_CODE);
             }
         });
     }
