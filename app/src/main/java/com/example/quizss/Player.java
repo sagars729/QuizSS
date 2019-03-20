@@ -21,4 +21,13 @@ public class Player {
     public void setScore(double score){
         mScore = score;
     }
+    @Override
+    public String toString() {
+        return "{name : "+mName+",score : " + mScore+"}";
+    }
+    public int compareTo(Player other){
+        if(other.getScore() == mScore) return 0;
+        else if(other.getScore() > mScore) return 1;
+        else return -1;
+    }
 }

@@ -8,6 +8,7 @@
     <string name="play_hint_button">Play Hint</string>
     <string name="hint_button">Hint</string>
     <string name="go_back_button">Go Back</string>
+    <string name="lead_button">Leaderboard</string>
 
     <string name="warning_text">Are you sure?</string>
 

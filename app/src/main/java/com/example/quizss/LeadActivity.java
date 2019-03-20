@@ -1,13 +1,8 @@
 package com.example.quizss;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
@@ -15,9 +10,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Map;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,15 +28,21 @@ public class LeadActivity extends AppCompatActivity implements PlayersAdapter.It
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
 
-    public void addItem() {
+    private RecyclerView mRecyclerView;
+
+    public void addItem(Player player) {
         String key = mRef.push().getKey();
-        mRef.child(key).child("score").setValue(0);
-        mRef.child(key).child("name").setValue("sagar");
+        mRef.child(key).setValue(player);
         //adapter.notifyDataSetChanged();
     }
 
     public void getRankings(int limit){
-
+        Collections.sort(mPlayers, new Comparator<Player>() {
+            @Override
+            public int compare(Player p1, Player p2) {
+                return p1.compareTo(p2);
+            }
+        });
     }
 
     @Override
@@ -47,13 +51,32 @@ public class LeadActivity extends AppCompatActivity implements PlayersAdapter.It
         setContentView(R.layout.activity_lead);
         mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference("players");
-        addItem();
-        getRankings(20);
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_players);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new PlayersAdapter(this, mPlayers);
-        adapter.setClickListener(this);
-        recyclerView.setAdapter(adapter);
+        mPlayers = new ArrayList<Player>();
+        mRecyclerView = (RecyclerView) findViewById(R.id.rv_players);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //addItem(new Player("Sagar", 0.0));
+        mRef.addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        mPlayers = new ArrayList<Player>();
+                        Map<String,Object> players = (Map<String,Object>) dataSnapshot.getValue();
+                        for(String key:players.keySet()){
+                           Map<String,Object> player = (Map<String,Object>)  players.get(key);
+                           Log.d("DB Out",player.toString());
+                           mPlayers.add(new Player(player.get("name").toString(), Double.parseDouble(player.get("score").toString())));
+                        }
+                        Log.d("players",mPlayers.toString());
+                        getRankings(5);
+                        adapter = new PlayersAdapter(LeadActivity.this, mPlayers);
+                        adapter.setClickListener(LeadActivity.this);
+                        mRecyclerView.setAdapter(adapter);
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        //handle databaseError
+                    }
+                });
     }
 
     @Override

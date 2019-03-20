@@ -33,10 +33,11 @@ public class PlayersAdapter  extends RecyclerView.Adapter<PlayersAdapter.ViewHol
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-
+        int rank = position + 1;
         player = mPlayers.get(position);
         holder.mNameTextView.setText(player.getName());
         holder.mScoreTextView.setText("" + player.getScore());
+        holder.mRankTextView.setText(rank + ".");
     }
 
     // total number of rows
@@ -50,11 +51,13 @@ public class PlayersAdapter  extends RecyclerView.Adapter<PlayersAdapter.ViewHol
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView mNameTextView;
         TextView mScoreTextView;
+        TextView mRankTextView;
 
         ViewHolder(View itemView) {
             super(itemView);
             mNameTextView = itemView.findViewById(R.id.playerName);
             mScoreTextView = itemView.findViewById(R.id.score);
+            mRankTextView = itemView.findViewById(R.id.playerRank);
             itemView.setOnClickListener(this);
         }
 

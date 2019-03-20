@@ -19,6 +19,7 @@ public class QuizActivity extends AppCompatActivity {
     private Button mSkipButton;
     private Button mResetButton;
     private Button mHintButton;
+    private Button mLeadButton;
 
     private TextView mQuestionTextView;
     private TextView mQuestionHeader;
@@ -78,6 +79,7 @@ public class QuizActivity extends AppCompatActivity {
         mSkipButton = (Button) findViewById(R.id.skip_button);
         mResetButton = (Button) findViewById(R.id.reset_button);
         mHintButton = (Button) findViewById(R.id.hint_button);
+        mLeadButton = (Button) findViewById(R.id.lead_button);
 
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
         mQuestionHeader = (TextView) findViewById(R.id.question_header);
@@ -136,11 +138,16 @@ public class QuizActivity extends AppCompatActivity {
         mHintButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent i = new Intent(QuizActivity.this, HintActivity.class);
+                i.putExtra("HINT",mQuestionBank[mCurrentIndex].getHintResId());
+                startActivityForResult(i,HINT_ACTIVITY_REQUEST_CODE);
+            }
+        });
+        mLeadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Intent i = new Intent(QuizActivity.this, LeadActivity.class);
                 startActivity(i);
-                //Intent i = new Intent(QuizActivity.this, HintActivity.class);
-                //i.putExtra("HINT",mQuestionBank[mCurrentIndex].getHintResId());
-                //startActivityForResult(i,HINT_ACTIVITY_REQUEST_CODE);
             }
         });
     }
