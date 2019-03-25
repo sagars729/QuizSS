@@ -32,8 +32,10 @@ public class QuizActivity extends AppCompatActivity {
     private double mScore = 0;
     private boolean mLock = false;
     private ProgressBar mProgressBar;
+    private boolean mSent = false;
 
     private static final int HINT_ACTIVITY_REQUEST_CODE = 0;
+    private static final int RANK_ACTIVITY_REQUEST_CODE = 1;
 
     private SharedPreferences mSharedPreferences;
     private double mHighScore = 0;
@@ -132,6 +134,7 @@ public class QuizActivity extends AppCompatActivity {
                 mLock = false;
                 mCurrentIndex = -1;
                 mScore = 0;
+                mSent = false;
                 updateQuestion();
             }
         });
@@ -147,7 +150,10 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(QuizActivity.this, LeadActivity.class);
-                startActivity(i);
+                i.putExtra("SCORE",mScore);
+                i.putExtra("SENT",mSent);
+                i.putExtra("LOCK",mLock);
+                startActivityForResult(i,RANK_ACTIVITY_REQUEST_CODE);
             }
         });
     }
@@ -157,7 +163,12 @@ public class QuizActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK){
                 mScore+=data.getDoubleExtra("PENALTY",0);
             }
+        }else if(requestCode == RANK_ACTIVITY_REQUEST_CODE){
+            if(resultCode == RESULT_OK){
+                mSent = data.getBooleanExtra("SENT",false);
+            }
         }
+
     }
 
 }

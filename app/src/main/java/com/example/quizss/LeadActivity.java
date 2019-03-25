@@ -1,10 +1,13 @@
 package com.example.quizss;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,6 +32,12 @@ public class LeadActivity extends AppCompatActivity implements PlayersAdapter.It
     private DatabaseReference mRef;
 
     private RecyclerView mRecyclerView;
+    private Button mSendButton;
+    private TextInputEditText mNameText;
+
+    private boolean mSent;
+    private double mScore;
+    private boolean mLock;
 
     public void addItem(Player player) {
         String key = mRef.push().getKey();
@@ -49,13 +58,20 @@ public class LeadActivity extends AppCompatActivity implements PlayersAdapter.It
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lead);
+
         mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference("players");
         mPlayers = new ArrayList<Player>();
+        mSent = getIntent().getBooleanExtra("SENT",true);
+        mScore = getIntent().getDoubleExtra("SCORE",0.0);
+        mLock = getIntent().getBooleanExtra("LOCK",false);
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_players);
+        mSendButton = (Button) findViewById(R.id.send_score_button);
+        mNameText = (TextInputEditText) findViewById(R.id.user_name);
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //addItem(new Player("Sagar", 0.0));
-        mRef.addListenerForSingleValueEvent(
+
+        mRef.addValueEventListener(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -77,6 +93,30 @@ public class LeadActivity extends AppCompatActivity implements PlayersAdapter.It
                         //handle databaseError
                     }
                 });
+
+        mSendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!mLock){
+                    Toast.makeText(LeadActivity.this,R.string.unfinished_toast,Toast.LENGTH_SHORT).show();
+                }
+                else if(!mSent){
+                    addItem(new Player(mNameText.getText().toString(),mScore));
+                    Toast.makeText(LeadActivity.this,R.string.sent_toast, Toast.LENGTH_SHORT).show();
+                    mSent = true;
+                }else{
+                    Toast.makeText(LeadActivity.this,R.string.sent_old_toast, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    }
+
+    public void onBackPressed() {
+        Intent i = new Intent();
+        i.putExtra("SENT",mSent);
+        setResult(RESULT_OK,i);
+        finish();
     }
 
     @Override

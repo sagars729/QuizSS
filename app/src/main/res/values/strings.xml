@@ -8,13 +8,19 @@
     <string name="play_hint_button">Play Hint</string>
     <string name="hint_button">Hint</string>
     <string name="go_back_button">Go Back</string>
-    <string name="lead_button">Leaderboard</string>
+    <string name="lead_button">Ranks</string>
+    <string name="send_score_button">Send</string>
 
     <string name="warning_text">Are you sure?</string>
+    <string name="ask_name_text">Enter Name</string>
+    <string name="lead_title">Leaderboard</string>
 
     <string name="correct_toast">Correct</string>
     <string name="incorrect_toast">Incorrect</string>
     <string name="locked_toast">No More Questions!</string>
+    <string name="sent_toast">Your Score Has Been Sent</string>
+    <string name="sent_old_toast">Your Score Has Already Been Sent</string>
+    <string name="unfinished_toast">You Have Not Completed The Quiz!</string>
 
 
     <string name="q0">This Is An App</string>
