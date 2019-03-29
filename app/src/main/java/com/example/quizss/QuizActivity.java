@@ -75,6 +75,8 @@ public class QuizActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+        //getActionBar().setTitle(R.string.action_bar);
+        getSupportActionBar().setTitle(R.string.action_bar);
 
         mTrueButton = (Button)findViewById(R.id.true_button);
         mFalseButton = (Button)findViewById(R.id.false_button);

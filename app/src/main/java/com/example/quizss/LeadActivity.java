@@ -58,6 +58,7 @@ public class LeadActivity extends AppCompatActivity implements PlayersAdapter.It
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lead);
+        getSupportActionBar().setTitle(R.string.action_bar);
 
         mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference("players");

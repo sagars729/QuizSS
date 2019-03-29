@@ -18,6 +18,7 @@ public class HintActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hint);
+        getSupportActionBar().setTitle(R.string.action_bar);
 
         mPlayHint = (Button) findViewById(R.id.play_hint_button);
         mGoBack = (Button) findViewById(R.id.go_back_button);
